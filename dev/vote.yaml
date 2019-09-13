@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vote
+  name: vote
+  namespace: vote
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+      - image: preethireddy95/vote-app:latest
+        name: vote
+        ports:
+        - containerPort: 80
+          name: vote
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: vote
+  name: vote
+  namespace: vote
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "vote-service"
+    port: 80
+    targetPort: 80
+  selector:
+    app: vote
