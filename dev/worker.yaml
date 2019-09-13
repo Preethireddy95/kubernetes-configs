@@ -16,5 +16,5 @@ spec:
         app: worker
     spec:
       containers:
-      - image: preethireddy95/worker-app:latest
+      - image: 827922430477.dkr.ecr.us-west-2.amazonaws.com/worker:latest
         name: worker

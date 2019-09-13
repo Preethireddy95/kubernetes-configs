@@ -16,7 +16,7 @@ spec:
         app: vote
     spec:
       containers:
-      - image: preethireddy95/vote-app:latest
+      - image: 827922430477.dkr.ecr.us-west-2.amazonaws.com/vote:latest
         name: vote
         ports:
         - containerPort: 80
