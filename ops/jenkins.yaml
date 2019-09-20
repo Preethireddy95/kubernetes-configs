@@ -49,3 +49,5 @@ spec:
 
 ## create this clusterrolebinding to connect to kubernetes master from jenkins
 # kubectl create clusterrolebinding default-admin --clusterrole cluster-admin --serviceaccount=default:default
+# minikube addons configure registry-creds => configure only with AWS ECR
+# minikube addons enable registry-creds
