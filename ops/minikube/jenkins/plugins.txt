@@ -1,0 +1,16 @@
+ssh-slaves
+email-ext
+mailer
+slack
+htmlpublisher
+greenballs
+simple-theme-plugin
+kubernetes
+amazon-ecr
+aws-credentials
+docker-build-publish
+nodejs
+github-organization-folder
+workflow-aggregator
+blueocean
+docker-plugin
