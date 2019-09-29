@@ -4,7 +4,7 @@ metadata:
   labels:
     app: vote
   name: vote
-  namespace: dev
+  namespace: qa
 spec:
   replicas: 1
   selector:
@@ -28,7 +28,7 @@ metadata:
   labels:
     app: vote
   name: vote
-  namespace: dev
+  namespace: qa
 spec:
   type: LoadBalancer
   ports:

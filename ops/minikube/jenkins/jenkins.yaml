@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: jenkins
+  namespace: ops
 spec:
   replicas: 1
   template:
@@ -11,13 +12,13 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: k8s-jenkins:lts
+          image: preethireddy95/k8s-jenkins:lts
           imagePullPolicy: IfNotPresent
           resources:
             limits:
-              memory: 1024Mi
+              memory: 2048Mi
             requests:
-              memory: 512Mi
+              memory: 1024Mi
           env:
             - name: JAVA_OPTS
               value: -Djenkins.install.runSetupWizard=false
@@ -37,6 +38,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jenkins
+  namespace: ops
 spec:
   type: NodePort
   ports:
@@ -44,10 +46,3 @@ spec:
       targetPort: 8080
   selector:
     app: jenkins
-
-
-
-## create this clusterrolebinding to connect to kubernetes master from jenkins
-# kubectl create clusterrolebinding default-admin --clusterrole cluster-admin --serviceaccount=default:default
-# minikube addons configure registry-creds => configure only with AWS ECR
-# minikube addons enable registry-creds

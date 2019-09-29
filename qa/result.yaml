@@ -2,38 +2,38 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: vote
-  name: vote
-  namespace: dev
+    app: result
+  name: result
+  namespace: qa
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vote
+      app: result
   template:
     metadata:
       labels:
-        app: vote
+        app: result
     spec:
       containers:
-      - image: 827922430477.dkr.ecr.us-west-2.amazonaws.com/vote:latest
-        name: vote
+      - image: 827922430477.dkr.ecr.us-west-2.amazonaws.com/result:latest
+        name: result
         ports:
         - containerPort: 80
-          name: vote
+          name: result
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: vote
-  name: vote
-  namespace: dev
+    app: result
+  name: result
+  namespace: qa
 spec:
   type: LoadBalancer
   ports:
-  - name: "vote-service"
+  - name: "result-service"
     port: 80
     targetPort: 80
   selector:
-    app: vote
+    app: result

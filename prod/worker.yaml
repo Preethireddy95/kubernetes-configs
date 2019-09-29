@@ -4,7 +4,7 @@ metadata:
   labels:
     app: worker
   name: worker
-  namespace: dev
+  namespace: prod
 spec:
   replicas: 1
   selector:

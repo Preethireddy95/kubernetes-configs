@@ -4,7 +4,7 @@ metadata:
   labels:
     app: redis
   name: redis
-  namespace: dev
+  namespace: qa
 spec:
   replicas: 1
   selector:
@@ -34,7 +34,7 @@ metadata:
   labels:
     app: redis
   name: redis
-  namespace: dev
+  namespace: qa
 spec:
   type: ClusterIP
   ports:
