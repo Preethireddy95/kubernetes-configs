@@ -28,20 +28,26 @@ Github username and password as id: `git-creds`
 AWS access key and secret key of jenkins user as id: `aws-credentials`
 Docker hub username and password as id: `dockerhub-creds`
 
+## Add Global Tool configuration
+* Add JDK installation with Name: JDK-1.8
+
 ## Add Config files
 * Add npmrc config file with id: `npmrc`
-* Add custom config files for client.key, client.crt, ca.crt with id's: `client-key, client-crt, ca-crt`
-```
-cat ~/.minikube/client.key
-cat ~/.minikube/client.crt
-cat ~/.minikube/ca.crt
-```
+* Add config files for client.key, client.crt, ca.crt in kubeconfig file only as data.  
 * Add custom config file for minikube kubeconfig with id: `kubeconfig`
+
+# Generate the <CA-DATA>
+`cat ~/.minikube/ca.crt | base64 | tr -d '\n'`
+# Generate the <CLIENT-CRT-DATA>
+`cat ~/.minikube/client.crt | base64 | tr -d '\n'`
+# Generate the <CLIENT-KEY-DATA>
+`cat ~/.minikube/client.key | base64 | tr -d '\n'`
+# kubeconfig file
 ```
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority: /home/jenkins/agent/.minikube/ca.crt
+    certificate-authority-data: <CA-DATA>
     server: https://192.168.99.101:8443
   name: minikube
 contexts:
@@ -55,19 +61,21 @@ preferences: {}
 users:
 - name: minikube
   user:
-    client-certificate: /home/jenkins/agent/.minikube/client.crt
-    client-key: /home/jenkins/agent/.minikube/client.key
+    client-certificate-data: <CLIENT-CRT-DATA>
+    client-key-data: <CLIENT-KEY-DATA>
 ```
+# validate kubeconfig from local
+`kubectl get pods -n ops --kubeconfig=./config`
 
 ## Add jenkins slaves dynamic creation in kubernetes
 ### Add kubernetes cloud in jenkins configuration
-Get the kubernetes master URL and Jenkins pod internal IP
+* Get the kubernetes master URL and Jenkins pod internal IP
 ```
 kubectl cluster-info
 kubectl get pods -n ops
 kubectl describe <jenkins-pod-name> -n ops
 ```
-Sample format
+* Sample format
 ```
 Kubernetes URL: https://192.168.99.105:8443
 Kubernetes Namespace: ops

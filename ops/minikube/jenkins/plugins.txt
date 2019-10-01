@@ -14,3 +14,4 @@ github-organization-folder
 workflow-aggregator
 blueocean
 docker-plugin
+ws-cleanup
